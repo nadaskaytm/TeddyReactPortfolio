@@ -4,13 +4,34 @@ import PortfolioItem from './portfolio-item';
 
 
 export default class PortfolioContainer extends Component{
+    constructor(){
+        super();
+        
+        this.state = {
+            pageTitle: "Welcome to my portfolio!",
+            data: [ 
+                {title: "USMC"}, 
+                {title: "SAC Wireless"},
+                {title: "BNSF"}
+            ]
+        };
+    }
+
+    portfolioItems() {
+        return this.state.data.map(item => {
+            return <PortfolioItem title={item.title} />;
+        });
+
+    }
+
     render() {
         return(
             <div>
-                <h2>Portfolio items go here...</h2>
-
-                <PortfolioItem />
+                <h2>{this.state.pageTitle}</h2>
+            
+            {this.portfolioItems()}
+            
             </div>
-        )
+        );
     }
 }
