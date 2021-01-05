@@ -4,11 +4,12 @@ import PortfolioItem from './portfolio-item';
 
 
 export default class PortfolioContainer extends Component{
-    constructor(){
+    constructor() {
         super();
         
         this.state = {
             pageTitle: "Welcome to my portfolio!",
+            isLoading: false,
             data: [ 
                 {title: "USMC", category: "Military"}, 
                 {title: "SAC Wireless", category: "Telecommunications"},
@@ -36,6 +37,10 @@ export default class PortfolioContainer extends Component{
 
 
     render() {
+        if (this.state.isLoading) {
+            return <div>Loading...</div>;
+        }
+
         return(
             <div>
                 <h2>{this.state.pageTitle}</h2>
