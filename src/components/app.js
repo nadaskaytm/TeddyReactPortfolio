@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from "moment";
-import axios from 'axios';
+
 
 import PortfolioContainer from "./Portfolio/portfolio-container";
 import NavigationContainer from "./navigation/Navigation-Container";
@@ -18,11 +18,7 @@ import NoMatch from "./pages/no-match";
 
 
 export default class App extends Component {
-  constructor() {
-    super();
-
-    this.getPortfolioItems = this. getPortfolioItems.bind(this);
-  }
+  
   getPortfolioItems() {
     const axios = require('axios');
 
