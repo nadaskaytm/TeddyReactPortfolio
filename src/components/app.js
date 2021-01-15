@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import moment from "moment";
-
 
 import PortfolioContainer from "./Portfolio/portfolio-container";
 import NavigationContainer from "./navigation/Navigation-Container";
@@ -36,11 +34,6 @@ axios.get("https://tnadaskay.devcamp.space/portfolio/portfolio_items")
       <div className='app'>
         <Router>
           <div>
-            <div>
-              <h1>Teddy Nadaskay Portfolio</h1>
-  
-              {moment().format('MMMM Do YYYY, h:mm:ss a')}
-            </div>
             <NavigationContainer />
 
             <Switch>
