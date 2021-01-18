@@ -12,6 +12,7 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Blog from "./pages/blog";
 import PortfolioDetail from "./Portfolio/portfolio-detail";
+import Auth from "./pages/auth";
 import NoMatch from "./pages/no-match";
 
 
@@ -31,13 +32,14 @@ axios.get("https://tnadaskay.devcamp.space/portfolio/portfolio_items")
   render() {
     this.getPortfolioItems();
     return (
-      <div className='app'>
+      <div className='container'>
         <Router>
           <div>
             <NavigationContainer />
 
             <Switch>
               <Route exact path ="/" component={Home} />
+              <Route path="/auth" component={Auth} />
               <Route path ="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
