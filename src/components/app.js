@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import PortfolioContainer from "./Portfolio/portfolio-container";
 import NavigationContainer from "./navigation/Navigation-Container";
@@ -40,6 +41,41 @@ export default class App extends Component {
     });
   }
 
+  checkLoginStatus() {
+    return axios.get("https://api.devcamp.space/logged_in", {
+      withCredentials: true
+    })
+    .then(response => {
+      const loggedIn = response.data.logged_in;
+      const loggedInStatus = this.state.loggedInStatus;
+
+      //if loggedIn and status is logged_in => return data
+      //if loggedIn status not
+      if (loggedIn && loggedInStatus === "LOGGED_IN") {
+        return loggedIn;
+      }else if (loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+        this.setState({
+          loggedInStatus: "LOGGED_IN"
+        });
+      }else if (!loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+        this.setState({
+          loggedInStatus: "LOGGED_IN"
+        });
+      }
+    })
+    .catch(error => {
+      console.log("Error", error)
+    })
+  }
+
+  componentDidMount() {
+    this.checkLoginStatus();
+  }
+
+  authorizedPages() {
+    return [<Route path="/blog" component={Blog} />];
+  }
+
 
   getPortfolioItems() {
     const axios = require('axios');
@@ -58,7 +94,7 @@ axios.get("https://tnadaskay.devcamp.space/portfolio/portfolio_items")
       <div className='container'>
         <Router>
           <div>
-            <NavigationContainer />
+            <NavigationContainer loggedInStatus={this.state.loggedInStatus}/>
 
             <h2>{this.state.loggedInStatus}</h2>
 
@@ -77,7 +113,7 @@ axios.get("https://tnadaskay.devcamp.space/portfolio/portfolio_items")
               />
               <Route path ="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route path="/blog" component={Blog} />
+              {this.state.loggedInStatus === "LOGGED_IN" ? (this.authorizedPages()): null}
               <Route path="/portfolio/:slug" component={PortfolioDetail} />
               <Route component={NoMatch} />
             </Switch>
