@@ -26,9 +26,10 @@ export default class PortfolioContainer extends Component{
     }
 
     getPortfolioItems() {
-        const axios = require('axios');
+        /*const axios = require('axios');*/
     
     axios.get("https://tnadaskay.devcamp.space/portfolio/portfolio_items")
+    
       .then(response => {
         this.setState({
             data: response.data.portfolio_items

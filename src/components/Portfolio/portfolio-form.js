@@ -13,7 +13,7 @@ export default class PortfolioForm extends Component {
       url: "",
       thumb_image: "",
       banner_image: "",
-      logo: ""
+
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,11 +39,13 @@ export default class PortfolioForm extends Component {
   }
 
   handleSubmit(event) {
-    axios
+    axios({
+        withCredentials: true
+    })
       .post(
         "https://tnadaskay.devcamp.space/portfolio/portfolio_items",
         this.buildForm(),
-        { withCredentials: true }
+        { }
       )
       .then(response => {
         console.log("response", response);
